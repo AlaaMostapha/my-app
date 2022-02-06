@@ -156,6 +156,7 @@ function App() {
           to="end"
           borderColor="#D0D2D3"
           fromAnchor="bottom"
+          className="start-end"
         />
         <LineTo delay={0} from="H1" to="D" borderColor="#D0D2D3" />
       </div>
@@ -188,31 +189,24 @@ function App() {
                 ii % 2 != 0 && "justify-content-end"
               }`}
             >
-              {console.log(
-                data.sub_heads.length % 2 != 0 &&
-                  ii == data.sub_heads.length - 1
-              )}
-              {data.sub_heads.length % 2 != 0 &&
-              ii == data.sub_heads.length - 1 ? (
-                <>
-                  {console.log("iiiii", ii)}
-                  <SteppedLineTo
-                    delay={0}
-                    from={`subhead-${ii}`}
-                    to={`end`}
-                    orientation="h"
-                    borderColor="#D0D2D3"
-                  />
-                </>
-              ) : ii % 2 == 0 ? (
-                <LineTo
+              <LineTo
+                delay={0}
+                from={`subhead-${ii}`}
+                to="start-end"
+                borderColor="#D0D2D3"
+                // fromAnchor="middle"
+                // toAnchor="middle"
+              />
+              {/* <SteppedLineTo
                   delay={0}
                   from={`subhead-${ii}`}
-                  to={`subhead-${ii + 1}`}
-                  orientation="h"
+                  to={`start-end`}
+                  // orientation="v" 
+                  // fromAnchor="0 60%"
+                  // fromAnchor="bottom"
+                  // toAnchor="center"
                   borderColor="#D0D2D3"
-                />
-              ) : null}
+                /> */}
               <div
                 align="right"
                 className={`col-md-4 ${ii % 2 == 0 ? "order-2" : "order-1"}`}
