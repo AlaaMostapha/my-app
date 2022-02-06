@@ -145,6 +145,96 @@ const data = {
       children: [],
     },
   ],
+  level3: [
+    {
+      title: "اسم1 الإدارة",
+      subtitle: "اسم المدير",
+      code: "33",
+      color: "#004A81",
+    },
+    {
+      title: "اسم11 الإدارة",
+      subtitle: "اسم المدير",
+      code: "33",
+      color: "#004A81",
+      children: [
+        {
+          title: "اسم  111 الإدارة",
+          subtitle: "اسم المدير",
+          code: "33",
+          color: "#00A19B",
+        },
+        {
+          title: "اسم 112 الإدارة",
+          subtitle: "اسم المدير",
+          code: "33",
+          color: "#00A19B",
+          children: [
+            {
+              title: "اسم1123  الإدارة",
+              subtitle: "اسم المدير",
+              code: "33",
+              color: "#D0D2D3",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      title: "اسم الإدارة",
+      subtitle: "اسم المدير",
+      code: "33",
+      color: "#004A81",
+      children: [
+        {
+          title: "اسم الإدارة",
+          subtitle: "اسم المدير",
+          code: "33",
+          color: "#00A19B",
+          children: [
+            {
+              title: "اسم الإدارة",
+              subtitle: "اسم المدير",
+              code: "33",
+              color: "#D0D2D3",
+            },
+            {
+              title: "اسم الإدارة",
+              subtitle: "اسم المدير",
+              code: "33",
+              color: "#D0D2D3",
+            },
+          ],
+        },
+        {
+          title: "اسم الإدارة",
+          subtitle: "اسم المدير",
+          code: "33",
+          color: "#00A19B",
+          children: [
+            {
+              title: "اسم الإدارة",
+              subtitle: "اسم المدير",
+              code: "33",
+              color: "#D0D2D3",
+            },
+            {
+              title: "اسم الإدارة",
+              subtitle: "اسم المدير",
+              code: "33",
+              color: "#D0D2D3",
+            },
+            {
+              title: "اسم الإدارة",
+              subtitle: "اسم المدير",
+              code: "33",
+              color: "#D0D2D3",
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };
 
 function App() {
@@ -189,11 +279,7 @@ function App() {
               className={`col-md-6 row mx-0 ${ii % 2 !== 0 && "justify-content-end"
                 }`}
             >
-              {console.log(
-                data.sub_heads.length % 2 !== 0 &&
-                ii === data.sub_heads.length - 1
-              )}
-              <Xarrow
+           <Xarrow
                 start={`subhead-${ii}`}
                 end={"H1"}
                 endAnchor={'bottom'}
@@ -213,7 +299,7 @@ function App() {
                   name={subhead.subtitle}
                   id={subhead.code}
                   color={subhead.color}
-                  className={`subhead-${ii} mb-4`}
+                  className={`subhead-${ii} mb-5`}
                 />
               </div>
               <div
@@ -230,7 +316,7 @@ function App() {
                           name={child.subtitle}
                           id={child.code}
                           color={child.color}
-                          className={`sub${ii}-${i} mb-4`}
+                          className={`sub${ii}-${i} mb-5`}
                         />
                         <SteppedLineTo
                           delay={0}
@@ -248,6 +334,79 @@ function App() {
         })}
       </div>
       <div className="end mb-5">&nbsp;</div>
+
+      <div className="lvl3">
+        <div className="row g-0">
+          {data.level3.map((item, ii) => (
+            <div className="col-md-4 mt-5 text-center" key={ii}>
+              <Card
+                title={item.title}
+                name={item.subtitle}
+                id={item.code}
+                color={item.color}
+                className={`lvl3-${ii} inline-block mb-5`}
+              />
+              <SteppedLineTo
+                delay={0}
+                from={`lvl3-${ii}`}
+                to={`end`}
+                borderColor="#D0D2D3"
+                fromAnchor="50% -3"
+              />
+              <div className="row g-0 justify-content-around">
+                {item.children?.length > 0 &&
+                  item.children.map((child, iii) => (
+                    <>
+                      <div className="col-md-5">
+                        <Card
+                          key={iii}
+                          title={child.title}
+                          name={child.subtitle}
+                          id={child.code}
+                          color={child.color}
+                          className={`child-lvl1-${ii}-${iii} mb-5`}
+                        />
+                        {child?.children?.length > 0 &&
+                          child.children.map((secChild, i) => (
+                            <>
+                              <Card
+                                key={i}
+                                title={secChild.title}
+                                name={secChild.subtitle}
+                                id={secChild.code}
+                                color={secChild.color}
+                                className={`child-lvl2-${ii}-${i} mb-5`}
+                              />
+                              {console.log(i, ii, iii)}
+                              {console.log(
+                                `child-lvl1-${ii}-${iii}`,
+                                `child-lvl2-${ii}-${i}`
+                              )}
+                              {/* <SteppedLineTo
+                                delay={0}
+                                from={`child-lvl1-${ii}-${iii}`}
+                                to={`child-lvl2-${ii}-${i}`}
+                                borderColor="#D0D2D3"
+                                orientation="h"
+                              /> */}
+                              <Xarrow
+                                start={`child-lvl1-${ii}-${iii}`}
+                                end={`child-lvl2-${ii}-${i}`} //or an id
+                                path="grid"
+                                lineColor="#D0D2D3"
+                                strokeWidth={1}
+                                showHead={false}
+                              />
+                            </>
+                          ))}
+                      </div>
+                    </>
+                  ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
