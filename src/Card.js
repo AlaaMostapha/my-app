@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import "./card.css";
 const Card = forwardRef(({ title, name, id, color, className, htmlId }, ref) => {
   return (
-    <div id={htmlId} ref={ref} className={`card-layout ${className}`} style={{ outline: `2px solid ${color}` }}>
+    <div id={htmlId} ref={ref} className={`card-layout inline-block ${className}`} style={{ outline: `2px solid ${color}` }}>
       <div className="card-id" style={{ outline: `2px solid ${color}` }}>
         <p className="mb-0"> {id} رمز </p>
       </div>

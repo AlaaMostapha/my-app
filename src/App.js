@@ -151,6 +151,20 @@ const data = {
       subtitle: "اسم المدير",
       code: "33",
       color: "#004A81",
+      children: [
+        {
+          title: "اسم  111 الإدارة",
+          subtitle: "اسم المدير",
+          code: "33",
+          color: "#00A19B",
+        },
+        {
+          title: "اسم  111 الإدارة",
+          subtitle: "اسم المدير",
+          code: "33",
+          color: "#00A19B",
+        },
+      ],
     },
     {
       title: "اسم11 الإدارة",
@@ -186,6 +200,46 @@ const data = {
       code: "33",
       color: "#004A81",
       children: [
+        {
+          title: "اسم الإدارة",
+          subtitle: "اسم المدير",
+          code: "33",
+          color: "#00A19B",
+          children: [
+            {
+              title: "اسم الإدارة",
+              subtitle: "اسم المدير",
+              code: "33",
+              color: "#D0D2D3",
+            },
+            {
+              title: "اسم الإدارة",
+              subtitle: "اسم المدير",
+              code: "33",
+              color: "#D0D2D3",
+            },
+          ],
+        },
+        {
+          title: "اسم الإدارة",
+          subtitle: "اسم المدير",
+          code: "33",
+          color: "#00A19B",
+          children: [
+            {
+              title: "اسم الإدارة",
+              subtitle: "اسم المدير",
+              code: "33",
+              color: "#D0D2D3",
+            },
+            {
+              title: "اسم الإدارة",
+              subtitle: "اسم المدير",
+              code: "33",
+              color: "#D0D2D3",
+            },
+          ],
+        },
         {
           title: "اسم الإدارة",
           subtitle: "اسم المدير",
@@ -262,7 +316,7 @@ function App() {
         </div>
         <div className="col-md-4 d-flex justify-content-center">
           <Card
-            htmlId={'H1'}
+            htmlId={"H1"}
             title={data.head.title}
             name={data.head.subtitle}
             id={data.head.code}
@@ -276,13 +330,14 @@ function App() {
         {data.sub_heads.map((subhead, ii) => {
           return (
             <div
-              className={`col-md-6 row mx-0 ${ii % 2 !== 0 && "justify-content-end"
-                }`}
+              className={`col-md-6 row mx-0 ${
+                ii % 2 !== 0 && "justify-content-end"
+              }`}
             >
-           <Xarrow
+              <Xarrow
                 start={`subhead-${ii}`}
                 end={"H1"}
-                endAnchor={'bottom'}
+                endAnchor={"bottom"}
                 path="grid"
                 lineColor="#D0D2D3"
                 strokeWidth={1}
@@ -337,71 +392,80 @@ function App() {
 
       <div className="lvl3">
         <div className="row g-0">
-          {data.level3.map((item, ii) => (
-            <div className="col-md-4 mt-5 text-center" key={ii}>
+          {data.level3.map((item, i) => (
+            <div className="col-md-4 mt-5 text-center" key={i}>
+              {/* {console.log("/ii", ii)} */}
               <Card
                 title={item.title}
                 name={item.subtitle}
                 id={item.code}
                 color={item.color}
-                className={`lvl3-${ii} inline-block mb-5`}
+                className={`lvl3-${i} inline-block mb-5`}
+                htmlId={`lvl3-${i}`}
               />
               <SteppedLineTo
                 delay={0}
-                from={`lvl3-${ii}`}
+                from={`lvl3-${i}`}
                 to={`end`}
                 borderColor="#D0D2D3"
                 fromAnchor="50% -3"
               />
+              <LineTo
+                delay={0}
+                from={`lvl3-${i}`}
+                to={`end-lvl3-${i}`}
+                borderColor="#D0D2D3"
+                fromAnchor="bottom"
+              />
               <div className="row g-0 justify-content-around">
                 {item.children?.length > 0 &&
-                  item.children.map((child, iii) => (
+                  item.children.map((child, ii) => (
                     <>
                       <div className="col-md-5">
                         <Card
-                          key={iii}
+                          key={ii}
                           title={child.title}
                           name={child.subtitle}
                           id={child.code}
                           color={child.color}
-                          className={`child-lvl1-${ii}-${iii} mb-5`}
+                          className={`child-lvl1-${i}-${ii} mb-5 inline-block`}
+                          htmlId={`child-lvl1-${i}-${ii}`}
+                        />
+                        {/* {console.log(`child-lvl1-${ii}-${iii}`, `lvl3-${ii}`)} */}
+                        <Xarrow
+                          start={`child-lvl1-${i}-${ii}`}
+                          end={`lvl3-${i}`}
+                          endAnchor={"bottom"}
+                          path="grid"
+                          lineColor="#D0D2D3"
+                          strokeWidth={1}
+                          showHead={false}
                         />
                         {child?.children?.length > 0 &&
-                          child.children.map((secChild, i) => (
+                          child.children.map((secChild, iii) => (
                             <>
                               <Card
-                                key={i}
+                                key={iii}
                                 title={secChild.title}
                                 name={secChild.subtitle}
                                 id={secChild.code}
                                 color={secChild.color}
-                                className={`child-lvl2-${ii}-${i} mb-5`}
+                                className={`child-lvl2-${ii}-${iii} mb-5`}
                               />
-                              {console.log(i, ii, iii)}
-                              {console.log(
-                                `child-lvl1-${ii}-${iii}`,
-                                `child-lvl2-${ii}-${i}`
-                              )}
+                              {console.log(i,ii,iii)}
                               {/* <SteppedLineTo
                                 delay={0}
-                                from={`child-lvl1-${ii}-${iii}`}
-                                to={`child-lvl2-${ii}-${i}`}
+                                from={`child-lvl2-${i}-${iii}`}
+                                to={`child-lvl1-${iii}-${ii} `}
                                 borderColor="#D0D2D3"
-                                orientation="h"
+                                fromAnchor="50% -3"
                               /> */}
-                              <Xarrow
-                                start={`child-lvl1-${ii}-${iii}`}
-                                end={`child-lvl2-${ii}-${i}`} //or an id
-                                path="grid"
-                                lineColor="#D0D2D3"
-                                strokeWidth={1}
-                                showHead={false}
-                              />
                             </>
                           ))}
                       </div>
                     </>
                   ))}
+                <div className={`end-lvl3-${i}`}></div>
               </div>
             </div>
           ))}
