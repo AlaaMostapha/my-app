@@ -1,6 +1,7 @@
 import { SteppedLineTo } from "react-lineto";
 import LineTo from "react-lineto";
 import Card from "./Card";
+import Xarrow from "react-xarrows";
 import "./App.css";
 const data = {
   head: {
@@ -171,6 +172,7 @@ function App() {
         </div>
         <div className="col-md-4 d-flex justify-content-center">
           <Card
+            htmlId={'H1'}
             title={data.head.title}
             name={data.head.subtitle}
             id={data.head.code}
@@ -184,40 +186,28 @@ function App() {
         {data.sub_heads.map((subhead, ii) => {
           return (
             <div
-              className={`col-md-6 row mx-0 ${
-                ii % 2 != 0 && "justify-content-end"
-              }`}
+              className={`col-md-6 row mx-0 ${ii % 2 !== 0 && "justify-content-end"
+                }`}
             >
               {console.log(
-                data.sub_heads.length % 2 != 0 &&
-                  ii == data.sub_heads.length - 1
+                data.sub_heads.length % 2 !== 0 &&
+                ii === data.sub_heads.length - 1
               )}
-              {data.sub_heads.length % 2 != 0 &&
-              ii == data.sub_heads.length - 1 ? (
-                <>
-                  {console.log("iiiii", ii)}
-                  <SteppedLineTo
-                    delay={0}
-                    from={`subhead-${ii}`}
-                    to={`end`}
-                    orientation="h"
-                    borderColor="#D0D2D3"
-                  />
-                </>
-              ) : ii % 2 == 0 ? (
-                <LineTo
-                  delay={0}
-                  from={`subhead-${ii}`}
-                  to={`subhead-${ii + 1}`}
-                  orientation="h"
-                  borderColor="#D0D2D3"
-                />
-              ) : null}
+              <Xarrow
+                start={`subhead-${ii}`}
+                end={"H1"}
+                endAnchor={'bottom'}
+                path="grid"
+                lineColor="#D0D2D3"
+                strokeWidth={1}
+                showHead={false}
+              />
               <div
                 align="right"
-                className={`col-md-4 ${ii % 2 == 0 ? "order-2" : "order-1"}`}
+                className={`col-md-4 ${ii % 2 === 0 ? "order-2" : "order-1"}`}
               >
                 <Card
+                  htmlId={`subhead-${ii}`}
                   key={ii}
                   title={subhead.title}
                   name={subhead.subtitle}
@@ -228,7 +218,7 @@ function App() {
               </div>
               <div
                 align="right"
-                className={`col-md-4 ${ii % 2 == 0 ? "order-1 " : "order-2"}`}
+                className={`col-md-4 ${ii % 2 === 0 ? "order-1 " : "order-2"}`}
               >
                 {subhead.children.length > 0 &&
                   subhead.children.map((child, i) => {

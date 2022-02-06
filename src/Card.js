@@ -1,8 +1,8 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import "./card.css";
-const Card = ({ title, name, id, color , className }) => {
+const Card = forwardRef(({ title, name, id, color, className, htmlId }, ref) => {
   return (
-    <div className={`card-layout ${className}`} style={{ outline: `2px solid ${color}` }}>
+    <div id={htmlId} ref={ref} className={`card-layout ${className}`} style={{ outline: `2px solid ${color}` }}>
       <div className="card-id" style={{ outline: `2px solid ${color}` }}>
         <p className="mb-0"> {id} رمز </p>
       </div>
@@ -14,6 +14,6 @@ const Card = ({ title, name, id, color , className }) => {
       </div>
     </div>
   );
-};
+});
 
 export default Card;
