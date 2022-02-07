@@ -335,15 +335,14 @@ function App() {
         <div className="col-md-4"></div>
       </div>
       <div className="row g-0 mb-5">
-        {data.sub_heads.map((subhead, ii) => {
+        {data.sub_heads.map((subhead, i) => {
           return (
             <div
-              className={`col-md-6 row mx-0 ${
-                ii % 2 !== 0 && "justify-content-end"
-              }`}
+              className={`col-md-6 row mx-0 ${i % 2 !== 0 && "justify-content-end"
+                }`}
             >
               <Xarrow
-                start={`subhead-${ii}`}
+                start={`subhead-${i}`}
                 end={"H1"}
                 endAnchor={"bottom"}
                 path="grid"
@@ -353,44 +352,45 @@ function App() {
               />
               <div
                 align="right"
-                className={`col-md-4 ${ii % 2 === 0 ? "order-2" : "order-1"}`}
+                className={`col-md-4 ${i % 2 === 0 ? "order-2" : "order-1"}`}
               >
                 <Card
-                  htmlId={`subhead-${ii}`}
-                  key={ii}
+                  htmlId={`subhead-${i}`}
+                  key={i}
                   title={subhead.title}
                   name={subhead.subtitle}
                   id={subhead.code}
                   color={subhead.color}
-                  className={`subhead-${ii} mb-5`}
+                  className={`mb-5`}
                 />
               </div>
               <div
                 align="right"
-                className={`col-md-4 ${ii % 2 === 0 ? "order-1 " : "order-2"}`}
+                className={`col-md-4 ${i % 2 === 0 ? "order-1 " : "order-2"}`}
               >
-                {subhead.children.length > 0 &&
-                  subhead.children.map((child, i) => {
-                    return (
-                      <>
-                        <Card
-                          key={i}
-                          title={child.title}
-                          name={child.subtitle}
-                          id={child.code}
-                          color={child.color}
-                          className={`sub${ii}-${i} mb-5`}
-                        />
-                        <SteppedLineTo
-                          delay={0}
-                          from={`subhead-${ii}`}
-                          to={`sub${ii}-${i}`}
-                          orientation="h"
-                          borderColor="#D0D2D3"
-                        />
-                      </>
-                    );
-                  })}
+                {subhead.children?.map((child, j) => {
+                  return (
+                    <>
+                      <Card
+                        key={j}
+                        title={child.title}
+                        name={child.subtitle}
+                        id={child.code}
+                        color={child.color}
+                        className={`mb-5`}
+                        htmlId={`sub${i}-${j}`}
+                      />
+                      <Xarrow
+                        start={`sub${i}-${j}`}
+                        end={`subhead-${i}`}
+                        path="grid"
+                        lineColor="#D0D2D3"
+                        strokeWidth={1}
+                        showHead={false}
+                      />
+                    </>
+                  );
+                })}
               </div>
             </div>
           );
@@ -425,45 +425,57 @@ function App() {
                 fromAnchor="bottom"
               />
               <div className="row g-0 justify-content-around">
-                {item.children?.length > 0 &&
-                  item.children.map((child, ii) => (
-                    <>
-                      <div className="col-md-5">
-                        <Card
-                          key={ii}
-                          title={child.title}
-                          name={child.subtitle}
-                          id={child.code}
-                          color={child.color}
-                          className={`child-lvl1-${i}-${ii} mb-5`}
-                          htmlId={`child-lvl1-${i}-${ii}`}
-                        />
-                        <Xarrow
-                          start={`child-lvl1-${i}-${ii}`}
-                          end={`lvl3-${i}`}
-                          endAnchor={"bottom"}
-                          path="grid"
-                          lineColor="#D0D2D3"
-                          strokeWidth={1}
-                          showHead={false}
-                          // className={`child-lvl1-${i}-${ii}`}
-                        />
-                        {child?.children?.length > 0 &&
-                          child.children.map((secChild, iii) => (
-                            <>
-                              <Card
-                                key={iii}
-                                title={secChild.title}
-                                name={secChild.subtitle}
-                                id={secChild.code}
-                                color={secChild.color}
-                                className={`child-lvl2-${ii}-${iii} mb-5`}
-                              />
-                            </>
-                          ))}
-                      </div>
-                    </>
-                  ))}
+                {item.children?.map((child, j) => (
+                  <>
+                    <div className="col-md-5 mb-5">
+                      <Card
+                        key={`${i}-${j}`}
+                        title={child.title}
+                        name={child.subtitle}
+                        id={child.code}
+                        color={child.color}
+                        className={`mb-5`}
+                        htmlId={`child-lvl1-${i}-${j}`}
+                      />
+                      <Xarrow
+                        start={`child-lvl1-${i}-${j}`}
+                        end={`lvl3-${i}`}
+                        startAnchor={j % 2 === 0 ? 'left' : 'right'}
+                        endAnchor={"bottom"}
+                        path="grid"
+                        lineColor="#D0D2D3"
+                        strokeWidth={1}
+                        showHead={false}
+                      />
+                      {child.children?.map((secChild, l) => (
+                        <>
+                          <Card
+                            key={`${i}-${j}-${l}`}
+                            title={secChild.title}
+                            name={secChild.subtitle}
+                            id={secChild.code}
+                            color={secChild.color}
+                            className={`mb-5`}
+                            htmlId={`child-lvl2-${i}-${j}-${l}`}
+                          />
+                          <Xarrow
+                            start={`child-lvl2-${i}-${j}-${l}`}
+                            end={`child-lvl1-${i}-${j}`}
+                            endAnchor={j % 2 === 0 ? 'left' : 'right'}
+                            startAnchor={j % 2 === 0 ? 'left' : 'right'}
+                            _cpx1Offset={j % 2 === 0 ? -12 : 12}
+                            _cpx2Offset={j % 2 === 0 ? -12 : 12}
+                            _extendSVGcanvas={12}
+                            path="grid"
+                            lineColor="#D0D2D3"
+                            strokeWidth={1}
+                            showHead={false}
+                          />
+                        </>
+                      ))}
+                    </div>
+                  </>
+                ))}
                 <div className={`end-lvl3-${i}`}></div>
               </div>
             </div>
