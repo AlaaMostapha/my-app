@@ -1,5 +1,6 @@
 import { SteppedLineTo } from "react-lineto";
 import LineTo from "react-lineto";
+import { Grid, Paper , Box } from "@material-ui/core";
 import Card from "./Card";
 import Xarrow from "react-xarrows";
 import "./App.css";
@@ -293,7 +294,7 @@ const data = {
 
 function App() {
   return (
-    <div className="App mt-5 mb-5">
+    <Box  className="App" sx={{ mt: '3rem' , mb:'3rem' }}>
       <div className="connectors">
         <LineTo
           delay={0}
@@ -303,7 +304,6 @@ function App() {
           fromAnchor="bottom"
         />
         <LineTo delay={0} from="H1" to="D" borderColor="#D0D2D3" />
-
         <SteppedLineTo
           delay={0}
           from={`child-lvl1-2-0`}
@@ -312,8 +312,8 @@ function App() {
           borderColor="#D0D2D3"
         />
       </div>
-      <div className="row g-0 mt-5 mb-5">
-        <div className="col-md-4 d-flex justify-content-end">
+      <Grid container className="mb-4">
+        <Grid item xs={4} align="center">
           <Card
             title={data.head.department.title}
             name={data.head.department.subtitle}
@@ -321,8 +321,8 @@ function App() {
             color={data.head.department.color}
             className="D mx-4"
           />
-        </div>
-        <div className="col-md-4 d-flex justify-content-center">
+        </Grid>
+        <Grid item xs={4} align="center">
           <Card
             htmlId={"H1"}
             title={data.head.title}
@@ -331,15 +331,17 @@ function App() {
             color={data.head.color}
             className="H1"
           />
-        </div>
-        <div className="col-md-4"></div>
-      </div>
-      <div className="row g-0 mb-5">
+        </Grid>
+        <Grid item xs={4}></Grid>
+      </Grid>
+      <Grid container className="mb-4 px-5">
         {data.sub_heads.map((subhead, i) => {
           return (
-            <div
-              className={`col-md-6 row mx-0 ${i % 2 !== 0 && "justify-content-end"
-                }`}
+            <Grid
+            container
+            item xs={6}
+            justifyContent={`${i % 2 !== 0 && "flex-end"
+          }`}
             >
               <Xarrow
                 start={`subhead-${i}`}
@@ -350,9 +352,11 @@ function App() {
                 strokeWidth={1}
                 showHead={false}
               />
-              <div
-                align="right"
-                className={`col-md-4 ${i % 2 === 0 ? "order-2" : "order-1"}`}
+              <Grid
+                item
+                justifyContent="flex-end"
+                xs={4}
+                className={`${i % 2 === 0 ? "order-2 text-start" : "order-1"}`}
               >
                 <Card
                   htmlId={`subhead-${i}`}
@@ -361,12 +365,14 @@ function App() {
                   name={subhead.subtitle}
                   id={subhead.code}
                   color={subhead.color}
-                  className={`mb-5`}
+                  className={`mb-4`}
                 />
-              </div>
-              <div
-                align="right"
-                className={`col-md-4 ${i % 2 === 0 ? "order-1 " : "order-2"}`}
+              </Grid>
+              <Grid
+                item
+                justifyContent="flex-end"
+                xs={4}
+                className={`${i % 2 === 0 ? "order-1" : "order-2 text-start"}`}
               >
                 {subhead.children?.map((child, j) => {
                   return (
@@ -377,7 +383,7 @@ function App() {
                         name={child.subtitle}
                         id={child.code}
                         color={child.color}
-                        className={`mb-5`}
+                        className={`mb-4`}
                         htmlId={`sub${i}-${j}`}
                       />
                       <Xarrow
@@ -391,23 +397,22 @@ function App() {
                     </>
                   );
                 })}
-              </div>
-            </div>
+              </Grid>
+            </Grid>
           );
         })}
-      </div>
-      <div className="end mb-5">&nbsp;</div>
-
-      <div className="lvl3">
-        <div className="row g-0">
+      </Grid>
+      <Grid className="end mb-4">&nbsp;</Grid>
+      <Grid className="lvl3 px-5">
+        <Grid container>
           {data.level3.map((item, i) => (
-            <div className="col-md-4 mt-5 text-center" key={i}>
+            <Grid item xs={4} className="mt-5 text-center" key={i}>
               <Card
                 title={item.title}
                 name={item.subtitle}
                 id={item.code}
                 color={item.color}
-                className={`lvl3-${i} mb-5`}
+                className={`lvl3-${i} mb-4`}
                 htmlId={`lvl3-${i}`}
               />
               <SteppedLineTo
@@ -424,17 +429,19 @@ function App() {
                 borderColor="#D0D2D3"
                 fromAnchor="bottom"
               />
-              <div className="row g-0 justify-content-around">
+              {/* here -->row */}
+              <Grid container className="row g-0"
+              justifyContent="space-between">
                 {item.children?.map((child, j) => (
                   <>
-                    <div className="col-md-5 mb-5">
+                    <Grid item xs={5} className="mb-4">
                       <Card
                         key={`${i}-${j}`}
                         title={child.title}
                         name={child.subtitle}
                         id={child.code}
                         color={child.color}
-                        className={`mb-5`}
+                        className={`mb-4`}
                         htmlId={`child-lvl1-${i}-${j}`}
                       />
                       <Xarrow
@@ -455,7 +462,7 @@ function App() {
                             name={secChild.subtitle}
                             id={secChild.code}
                             color={secChild.color}
-                            className={`mb-5`}
+                            className={`mb-4`}
                             htmlId={`child-lvl2-${i}-${j}-${l}`}
                           />
                           <Xarrow
@@ -473,16 +480,16 @@ function App() {
                           />
                         </>
                       ))}
-                    </div>
+                    </Grid>
                   </>
                 ))}
                 <div className={`end-lvl3-${i}`}></div>
-              </div>
-            </div>
+              </Grid>
+            </Grid>
           ))}
-        </div>
-      </div>
-    </div>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }
 

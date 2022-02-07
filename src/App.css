@@ -1,8 +1,41 @@
 @import 'bootstrap/dist/css/bootstrap.css';
-
 body {
     direction: rtl;
 }
+.row{
+    display: flex;
+    width: 100%;
+}
 .inline-block{
     display: inline-block;
+}
+.m-0{
+    margin: 0;
+}
+.mb-4{
+    margin-bottom: 4rem!important;
+}
+.mx-4{
+    margin-right: 1.5rem !important;
+    margin-left: 1.5rem !important;
+}
+.px-5{
+    padding-right: 5rem !important;
+    padding-left: 5rem !important; 
+}
+.mt-4{
+    margin-top:4rem;
+}
+.py-1{
+    padding-top:0.5rem;
+    padding-bottom:0.5rem
+}
+.text-center{
+    text-align: center;
+}
+.order-1{
+    order:1
+}
+.order-2{
+    order:2
 }
