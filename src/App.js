@@ -303,6 +303,14 @@ function App() {
           fromAnchor="bottom"
         />
         <LineTo delay={0} from="H1" to="D" borderColor="#D0D2D3" />
+
+        <SteppedLineTo
+          delay={0}
+          from={`child-lvl1-2-0`}
+          to={`child-lvl2-0-0`}
+          orientation="v"
+          borderColor="#D0D2D3"
+        />
       </div>
       <div className="row g-0 mt-5 mb-5">
         <div className="col-md-4 d-flex justify-content-end">
@@ -394,13 +402,12 @@ function App() {
         <div className="row g-0">
           {data.level3.map((item, i) => (
             <div className="col-md-4 mt-5 text-center" key={i}>
-              {/* {console.log("/ii", ii)} */}
               <Card
                 title={item.title}
                 name={item.subtitle}
                 id={item.code}
                 color={item.color}
-                className={`lvl3-${i} inline-block mb-5`}
+                className={`lvl3-${i} mb-5`}
                 htmlId={`lvl3-${i}`}
               />
               <SteppedLineTo
@@ -428,10 +435,9 @@ function App() {
                           name={child.subtitle}
                           id={child.code}
                           color={child.color}
-                          className={`child-lvl1-${i}-${ii} mb-5 inline-block`}
+                          className={`child-lvl1-${i}-${ii} mb-5`}
                           htmlId={`child-lvl1-${i}-${ii}`}
                         />
-                        {/* {console.log(`child-lvl1-${ii}-${iii}`, `lvl3-${ii}`)} */}
                         <Xarrow
                           start={`child-lvl1-${i}-${ii}`}
                           end={`lvl3-${i}`}
@@ -440,6 +446,7 @@ function App() {
                           lineColor="#D0D2D3"
                           strokeWidth={1}
                           showHead={false}
+                          // className={`child-lvl1-${i}-${ii}`}
                         />
                         {child?.children?.length > 0 &&
                           child.children.map((secChild, iii) => (
@@ -452,14 +459,6 @@ function App() {
                                 color={secChild.color}
                                 className={`child-lvl2-${ii}-${iii} mb-5`}
                               />
-                              {console.log(i,ii,iii)}
-                              {/* <SteppedLineTo
-                                delay={0}
-                                from={`child-lvl2-${i}-${iii}`}
-                                to={`child-lvl1-${iii}-${ii} `}
-                                borderColor="#D0D2D3"
-                                fromAnchor="50% -3"
-                              /> */}
                             </>
                           ))}
                       </div>
