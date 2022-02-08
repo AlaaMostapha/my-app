@@ -295,6 +295,8 @@ const data = {
 function App() {
   return (
     <Box  className="App" sx={{ mt: '3rem' , mb:'3rem' }}>
+      <Grid item xs={1}></Grid>
+      <Grid item xs={11}>
       <div className="connectors">
         <LineTo
           delay={0}
@@ -334,6 +336,7 @@ function App() {
         </Grid>
         <Grid item xs={4}></Grid>
       </Grid>
+      {/* <Grid item xs={10}> */}
       <Grid container className="mb-4 px-5">
         {data.sub_heads.map((subhead, i) => {
           return (
@@ -355,7 +358,7 @@ function App() {
               <Grid
                 item
                 justifyContent="flex-end"
-                xs={4}
+                xs={5}
                 className={`${i % 2 === 0 ? "order-2 text-start" : "order-1"}`}
               >
                 <Card
@@ -371,7 +374,7 @@ function App() {
               <Grid
                 item
                 justifyContent="flex-end"
-                xs={4}
+                xs={5}
                 className={`${i % 2 === 0 ? "order-1" : "order-2 text-start"}`}
               >
                 {subhead.children?.map((child, j) => {
@@ -402,6 +405,7 @@ function App() {
           );
         })}
       </Grid>
+      {/* </Grid> */}
       <Grid className="end mb-4">&nbsp;</Grid>
       <Grid className="lvl3 px-5">
         <Grid container>
@@ -430,7 +434,7 @@ function App() {
                 fromAnchor="bottom"
               />
               {/* here -->row */}
-              <Grid container className="row g-0"
+              <Grid container className="row g-0 px-4"
               justifyContent="space-between">
                 {item.children?.map((child, j) => (
                   <>
@@ -488,6 +492,7 @@ function App() {
             </Grid>
           ))}
         </Grid>
+      </Grid>
       </Grid>
     </Box>
   );

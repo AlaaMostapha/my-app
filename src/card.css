@@ -1,5 +1,6 @@
 .card-layout{
-    width: 210px;
+    width:100%;
+    max-width: 210px;
     text-align: center;
     border-radius: 4px;
     position: relative;
